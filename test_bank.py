@@ -35,3 +35,8 @@ def test_two_consecutive_withdrawals(account):
     account.withdraw(30)
     account.withdraw(20)
     assert account.balance == 50
+
+# --- Step 0.6 (Comparing decimals) ---
+def test_interest(account):
+    account.add_interest(0.10)
+    assert account.balance == pytest.approx(110)
