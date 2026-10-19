@@ -8,6 +8,9 @@ class Quantity:
     
     def plus(self, other):
         return Sum(self, other)
+    
+    def reduce(self, unit):
+        return self
 
     def __eq__(self, other):
         return self.amount == other.amount and self.unit == other.unit
@@ -19,9 +22,13 @@ class Sum:
     def __init__(self, left, right):
         self.left = left
         self.right = right
+
+    def reduce(self, unit):
+        total_amount = self.left.amount + self.right.amount
+        return Quantity(total_amount, unit)
 class Converter:
     def reduce(self, source, unit):
-        return source
+        return source.reduce(unit)
      
 def grams(amount):
     return Quantity(amount, "g")
